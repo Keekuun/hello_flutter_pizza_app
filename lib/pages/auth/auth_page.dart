@@ -52,7 +52,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                           .colorScheme
                           .onBackground
                           .withOpacity(0.6),
-                      labelColor: Theme.of(context).colorScheme.onBackground,
+                      labelColor: Theme.of(context).colorScheme.primary,
                       tabs: const [
                         Padding(
                           padding: EdgeInsets.all(10.0),
