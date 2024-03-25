@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final pwdController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   String? _errorMsg;
   IconData pwdIcon = CupertinoIcons.eye_fill;
@@ -23,9 +26,11 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
             child: MyTextField(
                 controller: emailController,
                 hintText: '邮箱',
@@ -33,17 +38,11 @@ class _SignInPageState extends State<SignInPage> {
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: const Icon(CupertinoIcons.mail_solid),
                 errorMsg: _errorMsg,
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Please fill in this field';
-                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$')
-                      .hasMatch(val)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                }),
+                validator: _checkEmailValid),
           ),
+          const SizedBox(height: 20),
           SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
             child: MyTextField(
               controller: pwdController,
               hintText: '密码',
@@ -51,34 +50,19 @@ class _SignInPageState extends State<SignInPage> {
               keyboardType: TextInputType.visiblePassword,
               prefixIcon: const Icon(CupertinoIcons.lock_fill),
               errorMsg: _errorMsg,
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return 'Please fill in this field';
-                } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$')
-                    .hasMatch(val)) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
+              validator: _checkPwdValid,
               suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    pwdVisible = !pwdVisible;
-
-                    pwdIcon = pwdVisible
-                        ? CupertinoIcons.eye_fill
-                        : CupertinoIcons.eye_slash_fill;
-                  });
-                },
+                onPressed: _handlePwdVisible,
                 icon: Icon(pwdIcon),
               ),
             ),
           ),
+          const SizedBox(height: 20),
           !signInRequired
               ? SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: _handleLogin,
                       style: TextButton.styleFrom(
                           elevation: 3.0,
                           backgroundColor:
@@ -103,5 +87,43 @@ class _SignInPageState extends State<SignInPage> {
         ],
       ),
     );
+  }
+
+  String? _checkEmailValid(String? val) {
+    if (val!.isEmpty) {
+      return '请输入邮箱';
+    } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$').hasMatch(val)) {
+      return '您输入的邮箱不合法';
+    }
+    return null;
+  }
+
+  String? _checkPwdValid(String? val) {
+    if (val!.isEmpty) {
+      return '请输入密码';
+    } else if (!RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~`)\%\-(_+=;:,.<>/?"[{\]}\|^]).{8,}$')
+        .hasMatch(val)) {
+      return '您输入的密码不合法';
+    }
+    return null;
+  }
+
+  void _handlePwdVisible() {
+    setState(() {
+      pwdVisible = !pwdVisible;
+      pwdIcon =
+          pwdVisible ? CupertinoIcons.eye_fill : CupertinoIcons.eye_slash_fill;
+    });
+  }
+
+  void _handleLogin() {
+    if (_formKey.currentState!.validate()) {
+      log('emailController ${emailController.text}');
+      log('pwdController ${pwdController.text}');
+      setState(() {
+        signInRequired = true;
+      });
+    }
   }
 }
