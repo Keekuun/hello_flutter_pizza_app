@@ -10,7 +10,14 @@ class MyAppView extends StatelessWidget {
     return MaterialApp(
         title: 'Pizza App',
         theme: ThemeData(
-          colorScheme: ColorScheme.light(background: Colors.grey.shade200, onBackground: Colors.black, primary: Colors.redAccent, onPrimary: Colors.white),
+          colorScheme: ColorScheme.light(
+              background: Colors.grey.shade200,
+              onBackground: Colors.black,
+              primary: Colors.redAccent,
+              secondary: Colors.green,
+              onPrimary:
+              Colors.white
+          ),
           useMaterial3: true,
         ),
         // home: Image.asset('assets/1.png'),
