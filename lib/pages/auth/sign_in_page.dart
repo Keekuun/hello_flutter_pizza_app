@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/my_text_field.dart';
+import 'form_valid.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -38,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: const Icon(CupertinoIcons.mail_solid),
                 errorMsg: _errorMsg,
-                validator: _checkEmailValid),
+                validator: checkEmailValid),
           ),
           const SizedBox(height: 20),
           SizedBox(
@@ -50,10 +51,13 @@ class _SignInPageState extends State<SignInPage> {
               keyboardType: TextInputType.visiblePassword,
               prefixIcon: const Icon(CupertinoIcons.lock_fill),
               errorMsg: _errorMsg,
-              validator: _checkPwdValid,
+              validator: checkPwdValid,
               suffixIcon: IconButton(
                 onPressed: _handlePwdVisible,
-                icon: Icon(pwdIcon),
+                icon: Icon(
+                  pwdIcon,
+                  color: Colors.black38,
+                ),
               ),
             ),
           ),
@@ -62,7 +66,7 @@ class _SignInPageState extends State<SignInPage> {
               ? SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: TextButton(
-                      onPressed: _handleLogin,
+                      onPressed: _handleSignIn,
                       style: TextButton.styleFrom(
                           elevation: 3.0,
                           backgroundColor:
@@ -89,26 +93,6 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  String? _checkEmailValid(String? val) {
-    if (val!.isEmpty) {
-      return '请输入邮箱';
-    } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$').hasMatch(val)) {
-      return '您输入的邮箱不合法';
-    }
-    return null;
-  }
-
-  String? _checkPwdValid(String? val) {
-    if (val!.isEmpty) {
-      return '请输入密码';
-    } else if (!RegExp(
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~`)\%\-(_+=;:,.<>/?"[{\]}\|^]).{8,}$')
-        .hasMatch(val)) {
-      return '您输入的密码不合法';
-    }
-    return null;
-  }
-
   void _handlePwdVisible() {
     setState(() {
       pwdVisible = !pwdVisible;
@@ -117,7 +101,7 @@ class _SignInPageState extends State<SignInPage> {
     });
   }
 
-  void _handleLogin() {
+  void _handleSignIn() {
     if (_formKey.currentState!.validate()) {
       log('emailController ${emailController.text}');
       log('pwdController ${pwdController.text}');
