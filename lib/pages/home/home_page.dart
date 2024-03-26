@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final List<Map<String, dynamic>> spicyList = [
+    {'name': '🌶️ 微辣', 'color': Colors.greenAccent},
+    {'name': '🌶️ 中辣', 'color': Colors.orangeAccent},
+    {'name': '🌶️ 狠辣', 'color': Colors.redAccent},
+  ];
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> spicyList = [
-      {'🌶️ 微辣': 1, 'color': Colors.greenAccent},
-      {'🌶️ 中辣': 1, 'color': Colors.orangeAccent},
-      {'🌶️ 狠辣': 1, 'color': Colors.redAccent},
-    ];
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(

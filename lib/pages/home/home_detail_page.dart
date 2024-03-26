@@ -13,7 +13,9 @@ class HomeDetailPage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/8.png', scale: 16),
             const SizedBox(
@@ -29,17 +31,17 @@ class HomeDetailPage extends StatelessWidget {
             )
           ],
         ),
+        leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              CupertinoIcons.back,
+              color: Colors.white,
+            )),
         actions: [
           IconButton(
               onPressed: () {},
               icon: const Icon(
-                CupertinoIcons.cart,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.arrow_right,
+                CupertinoIcons.refresh_thin,
                 color: Colors.white,
               )),
         ],
@@ -59,27 +61,20 @@ class HomeDetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: const [
                     BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(3, 3),
-                        blurRadius: 5
-                    )
+                        color: Colors.grey, offset: Offset(3, 3), blurRadius: 5)
                   ],
-                  image: DecorationImage(
-                      image: AssetImage('assets/1.png')
-                  )
-              ),
+                  image: DecorationImage(image: AssetImage('assets/1.png'))),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(3, 3),
-                      blurRadius: 5
-                  )
+                      color: Colors.grey, offset: Offset(3, 3), blurRadius: 5)
                 ],
               ),
               child: Padding(
@@ -94,9 +89,7 @@ class HomeDetailPage extends StatelessWidget {
                           child: Text(
                             'pizza.name',
                             style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Expanded(
@@ -111,8 +104,9 @@ class HomeDetailPage extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).colorScheme.primary
-                                  ),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                                 ),
                                 const Text(
                                   "\$${10}.00",
@@ -120,8 +114,7 @@ class HomeDetailPage extends StatelessWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey,
-                                      decoration: TextDecoration.lineThrough
-                                  ),
+                                      decoration: TextDecoration.lineThrough),
                                 ),
                               ],
                             ),
@@ -129,7 +122,9 @@ class HomeDetailPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(height: 12,),
+                    const SizedBox(
+                      height: 12,
+                    ),
                     const Row(
                       children: [
                         MyMacroWidget(
@@ -137,19 +132,25 @@ class HomeDetailPage extends StatelessWidget {
                           value: 10,
                           icon: FontAwesomeIcons.fire,
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         MyMacroWidget(
                           title: "Protein",
                           value: 12,
                           icon: FontAwesomeIcons.dumbbell,
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         MyMacroWidget(
                           title: "Fat",
                           value: 12,
                           icon: FontAwesomeIcons.oilWell,
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         MyMacroWidget(
                           title: "Carbs",
                           value: 12,
@@ -157,29 +158,26 @@ class HomeDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 40,),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: TextButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         style: TextButton.styleFrom(
                             elevation: 3.0,
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)
-                            )
-                        ),
+                                borderRadius: BorderRadius.circular(10))),
                         child: const Text(
                           "立即购买",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
-                              fontWeight: FontWeight.w600
-                          ),
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     )
