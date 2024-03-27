@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/auth_page.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/sign_in_page.dart';
-import 'package:hello_flutter_pizza_app/pages/home/home_detail_page.dart';
-import 'package:hello_flutter_pizza_app/pages/home/home_page.dart';
+import 'package:hello_flutter_pizza_app/routes.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
@@ -22,9 +20,9 @@ class MyAppView extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
+        routes: routes,
         // home: Image.asset('assets/1.png'),
-        // home: const AuthPage());
-        home: HomePage());
-        // home: const HomeDetailPage());
+        // home: const AuthPage()
+    );
   }
 }

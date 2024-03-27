@@ -26,12 +26,19 @@ class HomePage extends StatelessWidget {
               '披萨',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  // color: Theme.of(context).colorScheme.primary
+                  fontSize: 24,
                   color: Colors.white),
             )
           ],
         ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              CupertinoIcons.back,
+              color: Colors.white,
+            )),
         actions: [
           IconButton(
               onPressed: () {},
@@ -40,9 +47,11 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/homeDetail');
+              },
               icon: const Icon(
-                CupertinoIcons.arrow_right,
+                CupertinoIcons.square_favorites_fill,
                 color: Colors.white,
               )),
         ],

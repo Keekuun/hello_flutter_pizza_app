@@ -102,6 +102,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _handleSignIn() {
+    Navigator.pushReplacementNamed(context, '/home');
     if (_formKey.currentState!.validate()) {
       log('emailController ${emailController.text}');
       log('pwdController ${pwdController.text}');

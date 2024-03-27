@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/sign_in_page.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/sign_up_page.dart';
@@ -13,6 +14,7 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
   late TabController tabController;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -27,11 +29,41 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Auth page'),
+        title: Row(
+          children: [
+            Image.asset('assets/8.png', scale: 20),
+            const SizedBox(
+              width: 10,
+            ),
+            const Text(
+              '欢迎光临',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white),
+            )
+          ],
+        ),
         titleTextStyle: const TextStyle(
-            color: Colors.black87, fontSize: 20, fontWeight: FontWeight.w500),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         backgroundColor: Colors.redAccent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            if (_scaffoldKey.currentState!.isDrawerOpen) {
+              _scaffoldKey.currentState!.closeDrawer();
+              //close drawer, if drawer is open
+            } else {
+              _scaffoldKey.currentState!.openDrawer();
+              //open drawer, if drawer is closed
+            }
+          },
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
@@ -39,7 +71,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
-            const BackColor(),
+            const BgColor(),
             Align(
               alignment: Alignment.center,
               child: Column(
@@ -65,7 +97,9 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Expanded(
                       child: TabBarView(
                     controller: tabController,
@@ -77,13 +111,98 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           ],
         ),
       )),
-      drawer: const Drawer(child: Text('Drawer')),
+      drawer: Drawer(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Colors.orange.shade50,
+                Colors.red.shade50,
+                Colors.orange.shade100,
+                Colors.red.shade100
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+              backgroundBlendMode: BlendMode.lighten,
+              image: const DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: AssetImage('assets/1.png'),
+                alignment: Alignment(0.5, 0.55),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Image.asset('assets/8.png', scale: 16),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '欢迎光临',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Theme.of(context).colorScheme.primary),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  ListBody(children: [
+                    ListTile(
+                        onTap: () {},
+                        title: Row(children: [
+                          Icon(Icons.local_pizza,
+                              color: Theme.of(context).colorScheme.onSecondary),
+                          const SizedBox(width: 10),
+                          Text('披萨介绍',
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary)),
+                        ])),
+                    ListTile(
+                        onTap: () {},
+                        title: Row(children: [
+                          Icon(Icons.storefront,
+                              color: Theme.of(context).colorScheme.primary),
+                          const SizedBox(width: 10),
+                          Text('关于本店',
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.primary)),
+                        ])),
+                    ListTile(
+                        onTap: () {},
+                        title: const Row(children: [
+                          Icon(Icons.person, color: Colors.black87),
+                          SizedBox(width: 10),
+                          Text('个人中心', style: TextStyle(color: Colors.black87)),
+                        ])),
+                    ListTile(
+                        onTap: () {},
+                        title: const Row(children: [
+                          Icon(Icons.exit_to_app_rounded, color: Colors.red),
+                          SizedBox(width: 10),
+                          Text('退出登录', style: TextStyle(color: Colors.red)),
+                        ]))
+                  ]),
+                  const Spacer(),
+                  const Text('做披萨我们是认真的！',
+                      style: TextStyle(color: Colors.black54)),
+                  const Text('v1.0.0', style: TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
 
-class BackColor extends StatelessWidget {
-  const BackColor({super.key});
+class BgColor extends StatelessWidget {
+  const BgColor({super.key});
 
   @override
   Widget build(BuildContext context) {

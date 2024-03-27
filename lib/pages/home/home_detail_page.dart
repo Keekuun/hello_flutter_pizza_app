@@ -32,7 +32,9 @@ class HomeDetailPage extends StatelessWidget {
           ],
         ),
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               CupertinoIcons.back,
               color: Colors.white,
