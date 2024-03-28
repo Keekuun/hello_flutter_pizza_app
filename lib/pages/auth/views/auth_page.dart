@@ -1,9 +1,8 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/sign_in_page.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/sign_up_page.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/views/sign_in_page.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/views/sign_up_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});

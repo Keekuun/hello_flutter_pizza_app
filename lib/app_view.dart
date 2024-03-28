@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/auth_page.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/views/auth_page.dart';
 import 'package:hello_flutter_pizza_app/routes.dart';
 
 class MyAppView extends StatelessWidget {
