@@ -68,16 +68,17 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
           child: SizedBox(
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
             const BgColor(),
-            Align(
+            Padding(padding: const EdgeInsets.symmetric(vertical: 40), child: Align(
               alignment: Alignment.center,
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: TabBar(
                       controller: tabController,
                       unselectedLabelColor: Theme.of(context)
@@ -102,12 +103,12 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                   ),
                   Expanded(
                       child: TabBarView(
-                    controller: tabController,
-                    children: const [SignInPage(), SignUpPage()],
-                  ))
+                        controller: tabController,
+                        children: const [SignInPage(), SignUpPage()],
+                      ))
                 ],
               ),
-            )
+            )),
           ],
         ),
       )),

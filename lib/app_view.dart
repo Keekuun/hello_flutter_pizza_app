@@ -8,7 +8,7 @@ class MyAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: '披萨批发',
+        title: '披萨',
         theme: ThemeData(
           colorScheme: ColorScheme.light(
               background: Colors.grey.shade200,
@@ -21,8 +21,6 @@ class MyAppView extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: routes,
-        // home: Image.asset('assets/1.png'),
-        // home: const AuthPage()
     );
   }
 }
