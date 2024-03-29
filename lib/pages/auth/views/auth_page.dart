@@ -1,8 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_in_page.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_up_page.dart';
+
+import '../blocs/auth_bloc/auth_bloc.dart';
+import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -104,6 +108,15 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                       child: TabBarView(
                         controller: tabController,
                         children: const [SignInPage(), SignUpPage()],
+                        // children: [
+                        //   BlocProvider<SignInBloc>(
+                        //     create: (context) => SignInBloc(
+                        //         context.read<AuthBloc>().userRepository
+                        //     ),
+                        //     child: const SignInPage(),
+                        //   ),
+                        //   const SignUpPage()
+                        // ],
                       ))
                 ],
               ),

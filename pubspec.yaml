@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.6.0
 
-#  firebase_core: ^2.16.0
+  firebase_core: ^2.27.2
 
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3

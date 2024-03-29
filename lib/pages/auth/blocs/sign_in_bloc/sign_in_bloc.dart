@@ -7,7 +7,7 @@ part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc() : super(SignInInitial()) {
+  SignInBloc(userRepository) : super(SignInInitial()) {
     on<SignInRequired>((event, emit) async {
       emit(SignInLoading());
       try {

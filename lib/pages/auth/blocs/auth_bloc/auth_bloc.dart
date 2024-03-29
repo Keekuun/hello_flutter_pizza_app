@@ -9,18 +9,11 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final FirebaseUser firebaseUser;
-
+  final UserRepository userRepository;
   late final StreamSubscription<MyUser?> _userSubscription;
 
-  @override
-  Future<void> close() {
-    _userSubscription.cancel();
-    return super.close();
-  }
-
-  AuthBloc({required this.firebaseUser}) : super(const AuthState.unknown()) {
-    _userSubscription = firebaseUser.user.listen((user) {
+  AuthBloc({required this.userRepository}) : super(const AuthState.unknown()) {
+    _userSubscription = userRepository.user.listen((user) {
       add(AuthUserChanged(user));
     });
 
@@ -31,5 +24,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(const AuthState.unauthenticated());
       }
     });
+  }
+
+  @override
+  Future<void> close() {
+    _userSubscription.cancel();
+    return super.close();
   }
 }
