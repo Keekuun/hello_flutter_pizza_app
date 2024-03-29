@@ -25,6 +25,10 @@ class MyAppView extends StatelessWidget {
       routes: routes,
       home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
         if (state.status == AuthStatus.authenticated) {
+          // return BlocProvider(
+          //     create: (context) => AuthBloc(
+          //         userRepository: context.read<AuthBloc>().userRepository),
+          //     child: HomePage());
           return HomePage();
         } else {
           return const AuthPage();

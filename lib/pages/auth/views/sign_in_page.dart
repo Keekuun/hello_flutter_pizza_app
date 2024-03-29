@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
 import '../../../components/my_text_field.dart';
 import 'form_valid.dart';
@@ -26,69 +28,87 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: MyTextField(
-                controller: emailController,
-                hintText: '邮箱',
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(CupertinoIcons.mail_solid),
+    return BlocListener<SignInBloc, SignInState>(
+      listener: (context, state) {
+        if (state is SignInSuccess) {
+          setState(() {
+            signInRequired = false;
+          });
+        } else if (state is SignInLoading) {
+          setState(() {
+            signInRequired = true;
+          });
+        } else if (state is SignInError) {
+          setState(() {
+            signInRequired = false;
+            _errorMsg = '邮箱或密码错误';
+          });
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: MyTextField(
+                  controller: emailController,
+                  hintText: '邮箱',
+                  obscureText: false,
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                  errorMsg: _errorMsg,
+                  validator: checkEmailValid),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: MyTextField(
+                controller: pwdController,
+                hintText: '密码',
+                obscureText: pwdVisible,
+                keyboardType: TextInputType.visiblePassword,
+                prefixIcon: const Icon(CupertinoIcons.lock_fill),
                 errorMsg: _errorMsg,
-                validator: checkEmailValid),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: MyTextField(
-              controller: pwdController,
-              hintText: '密码',
-              obscureText: pwdVisible,
-              keyboardType: TextInputType.visiblePassword,
-              prefixIcon: const Icon(CupertinoIcons.lock_fill),
-              errorMsg: _errorMsg,
-              validator: checkPwdValid,
-              suffixIcon: IconButton(
-                onPressed: _handlePwdVisible,
-                icon: Icon(
-                  pwdIcon,
-                  color: Colors.black38,
+                validator: checkPwdValid,
+                suffixIcon: IconButton(
+                  onPressed: _handlePwdVisible,
+                  icon: Icon(
+                    pwdIcon,
+                    color: Colors.black38,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          !signInRequired
-              ? SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: TextButton(
-                      onPressed: _handleSignIn,
-                      style: TextButton.styleFrom(
-                          elevation: 3.0,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(60))),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                        child: Text(
-                          '登录',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      )),
-                )
-              : const CircularProgressIndicator()
-        ],
+            const SizedBox(height: 20),
+            !signInRequired
+                ? SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: TextButton(
+                        onPressed: _handleSignIn,
+                        style: TextButton.styleFrom(
+                            elevation: 3.0,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(60))),
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                          child: Text(
+                            '登录',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        )),
+                  )
+                : const CircularProgressIndicator()
+          ],
+        ),
       ),
     );
   }
@@ -102,13 +122,11 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _handleSignIn() {
-    Navigator.pushReplacementNamed(context, '/home');
+    // Navigator.pushReplacementNamed(context, '/home');
     if (_formKey.currentState!.validate()) {
-      log('emailController ${emailController.text}');
-      log('pwdController ${pwdController.text}');
-      setState(() {
-        signInRequired = true;
-      });
+      context
+          .read<SignInBloc>()
+          .add(SignInRequired(emailController.text, pwdController.text));
     }
   }
 }

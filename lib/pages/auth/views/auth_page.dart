@@ -107,16 +107,16 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                   Expanded(
                       child: TabBarView(
                         controller: tabController,
-                        children: const [SignInPage(), SignUpPage()],
-                        // children: [
-                        //   BlocProvider<SignInBloc>(
-                        //     create: (context) => SignInBloc(
-                        //         context.read<AuthBloc>().userRepository
-                        //     ),
-                        //     child: const SignInPage(),
-                        //   ),
-                        //   const SignUpPage()
-                        // ],
+                        // children: const [SignInPage(), SignUpPage()],
+                        children: [
+                          BlocProvider<SignInBloc>(
+                            create: (context) => SignInBloc(
+                                context.read<AuthBloc>().userRepository
+                            ),
+                            child: const SignInPage(),
+                          ),
+                          const SignUpPage()
+                        ],
                       ))
                 ],
               ),
