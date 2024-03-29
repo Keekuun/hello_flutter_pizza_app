@@ -65,8 +65,12 @@ class FirebaseUserRepository implements UserRepository {
       if (firebaseUser == null) {
         yield MyUser.empty;
       } else {
-        yield await usersCollection.doc(firebaseUser.uid).get().then((value) =>
-            MyUser.fromEntity(MyUserEntity.fromDocument(value.data()!)));
+        try {
+          yield await usersCollection.doc(firebaseUser.uid).get().then((value) =>
+              MyUser.fromEntity(MyUserEntity.fromDocument(value.data()!)));
+        } catch (e) {
+          log('Error getting user: ${e.toString()}');
+        }
       }
     });
   }

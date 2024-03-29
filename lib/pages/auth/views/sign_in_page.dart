@@ -38,7 +38,7 @@ class _SignInPageState extends State<SignInPage> {
           setState(() {
             signInRequired = true;
           });
-        } else if (state is SignInError) {
+        } else if (state is SignInFailure) {
           setState(() {
             signInRequired = false;
             _errorMsg = '邮箱或密码错误';
@@ -70,7 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                 keyboardType: TextInputType.visiblePassword,
                 prefixIcon: const Icon(CupertinoIcons.lock_fill),
                 errorMsg: _errorMsg,
-                validator: checkPwdValid,
+                // validator: checkPwdValid,
                 suffixIcon: IconButton(
                   onPressed: _handlePwdVisible,
                   icon: Icon(

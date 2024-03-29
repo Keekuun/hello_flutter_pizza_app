@@ -19,7 +19,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         await _userRepository.signIn(event.email, event.password);
       } catch (e) {
         log('SignInBloc error: ${e.toString()}');
-        emit(SignInError());
+        emit(SignInFailure());
       }
     });
 

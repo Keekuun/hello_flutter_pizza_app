@@ -14,4 +14,4 @@ final class SignInLoading extends SignInState {}
 
 final class SignInSuccess extends SignInState {}
 
-final class SignInError extends SignInState {}
+final class SignInFailure extends SignInState {}
