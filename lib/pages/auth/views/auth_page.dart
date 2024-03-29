@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_flutter_pizza_app/components/home_drawer.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_in_page.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_up_page.dart';
@@ -36,6 +37,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/8.png', scale: 20),
             const SizedBox(
@@ -53,6 +55,21 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
         titleTextStyle: const TextStyle(
             color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         backgroundColor: Colors.redAccent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            if (_scaffoldKey.currentState!.isDrawerOpen) {
+              _scaffoldKey.currentState!.closeDrawer();
+              //close drawer, if drawer is open
+            } else {
+              _scaffoldKey.currentState!.openDrawer();
+              //open drawer, if drawer is closed
+            }
+          },
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
@@ -115,6 +132,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           ],
         ),
       )),
+      drawer: const HomeDrawer(),
     );
   }
 }
