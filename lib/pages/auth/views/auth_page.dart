@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_in_page.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/sign_up_page.dart';
 
@@ -52,21 +53,6 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
         titleTextStyle: const TextStyle(
             color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         backgroundColor: Colors.redAccent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            if (_scaffoldKey.currentState!.isDrawerOpen) {
-              _scaffoldKey.currentState!.closeDrawer();
-              //close drawer, if drawer is open
-            } else {
-              _scaffoldKey.currentState!.openDrawer();
-              //open drawer, if drawer is closed
-            }
-          },
-        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
@@ -76,140 +62,59 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
         child: Stack(
           children: [
             const BgColor(),
-            Padding(padding: const EdgeInsets.symmetric(vertical: 40), child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: TabBar(
-                      controller: tabController,
-                      unselectedLabelColor: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(0.6),
-                      labelColor: Theme.of(context).colorScheme.primary,
-                      tabs: const [
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('登录', style: TextStyle(fontSize: 16)),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: TabBar(
+                          controller: tabController,
+                          unselectedLabelColor: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(0.6),
+                          labelColor: Theme.of(context).colorScheme.primary,
+                          tabs: const [
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text('登录', style: TextStyle(fontSize: 16)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text('注册', style: TextStyle(fontSize: 16)),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('注册', style: TextStyle(fontSize: 16)),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Expanded(
-                      child: TabBarView(
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                          child: TabBarView(
                         controller: tabController,
                         // children: const [SignInPage(), SignUpPage()],
                         children: [
                           BlocProvider<SignInBloc>(
                             create: (context) => SignInBloc(
-                                context.read<AuthBloc>().userRepository
-                            ),
+                                context.read<AuthBloc>().userRepository),
                             child: const SignInPage(),
                           ),
-                          const SignUpPage()
+                          BlocProvider<SignUpBloc>(
+                            create: (context) => SignUpBloc(
+                                context.read<AuthBloc>().userRepository),
+                            child: const SignUpPage(),
+                          ),
                         ],
                       ))
-                ],
-              ),
-            )),
+                    ],
+                  ),
+                )),
           ],
         ),
       )),
-      drawer: Drawer(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Colors.orange.shade50,
-                Colors.red.shade50,
-                Colors.orange.shade100,
-                Colors.red.shade100
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-              backgroundBlendMode: BlendMode.lighten,
-              image: const DecorationImage(
-                fit: BoxFit.fitWidth,
-                image: AssetImage('assets/1.png'),
-                alignment: Alignment(0.5, 0.55),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset('assets/8.png', scale: 16),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '欢迎光临',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            color: Theme.of(context).colorScheme.primary),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ListBody(children: [
-                    ListTile(
-                        onTap: () {},
-                        title: Row(children: [
-                          Icon(Icons.local_pizza,
-                              color: Theme.of(context).colorScheme.onSecondary),
-                          const SizedBox(width: 10),
-                          Text('披萨介绍',
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary)),
-                        ])),
-                    ListTile(
-                        onTap: () {},
-                        title: Row(children: [
-                          Icon(Icons.storefront,
-                              color: Theme.of(context).colorScheme.primary),
-                          const SizedBox(width: 10),
-                          Text('关于本店',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.primary)),
-                        ])),
-                    ListTile(
-                        onTap: () {},
-                        title: const Row(children: [
-                          Icon(Icons.person, color: Colors.black87),
-                          SizedBox(width: 10),
-                          Text('个人中心', style: TextStyle(color: Colors.black87)),
-                        ])),
-                    ListTile(
-                        onTap: () {},
-                        title: const Row(children: [
-                          Icon(Icons.exit_to_app_rounded, color: Colors.red),
-                          SizedBox(width: 10),
-                          Text('退出登录', style: TextStyle(color: Colors.red)),
-                        ]))
-                  ]),
-                  const Spacer(),
-                  const Text('做披萨我们是认真的！',
-                      style: TextStyle(color: Colors.black54)),
-                  const Text('v1.0.0', style: TextStyle(color: Colors.grey)),
-                ],
-              ),
-            ),
-          )),
     );
   }
 }
