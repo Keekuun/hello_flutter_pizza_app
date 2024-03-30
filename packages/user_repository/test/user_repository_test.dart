@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:user_repository/user_repository.dart';
 
 void main() {
-  test('adds one to input values', () {
+  test('test MyUser', () {
     var userId = '123';
     var email = '123@qq.com';
     var name = 'Jeek';
