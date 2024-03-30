@@ -24,8 +24,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final pwdAgainController = TextEditingController();
   final nameController = TextEditingController();
 
-  bool pwdVisible = false;
-  bool pwdAgainVisible = false;
+  bool pwdVisible = true;
+  bool pwdAgainVisible = true;
   IconData pwdIcon = CupertinoIcons.eye_fill;
   IconData pwdAgainIcon = CupertinoIcons.eye_fill;
 

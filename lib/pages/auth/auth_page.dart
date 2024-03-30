@@ -74,7 +74,9 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
       body: SingleChildScrollView(
           child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height -
+            AppBar().preferredSize.height -
+            30,
         child: Stack(
           children: [
             const BgColor(),
@@ -143,34 +145,17 @@ class BgColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Align(
-          alignment: const AlignmentDirectional(20, -1.2),
-          child: Container(
-            height: MediaQuery.of(context).size.width,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.inversePrimary),
-          ),
-        ),
-        Align(
-          alignment: const AlignmentDirectional(2.7, -1.2),
-          child: Container(
-            height: MediaQuery.of(context).size.width / 1.3,
-            width: MediaQuery.of(context).size.width / 1.3,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-        ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 150.0, sigmaY: 150.0),
-          child: Container(),
-        ),
-      ],
-    );
+    return Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                tileMode: TileMode.decal,
+                begin: Alignment.topCenter, //渐变开始于上面的中间开始
+                end: Alignment.bottomCenter, //渐变结束于下面的中间
+                colors: [
+          Colors.red.shade100,
+          Colors.orange.shade100,
+          Colors.orange.shade50,
+          Colors.red.shade100
+        ])));
   }
 }
