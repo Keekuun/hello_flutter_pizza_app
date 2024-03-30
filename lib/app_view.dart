@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/blocs/auth_bloc/auth_bloc.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:hello_flutter_pizza_app/pages/auth/views/auth_page.dart';
 import 'package:hello_flutter_pizza_app/pages/home/home_page.dart';
 import 'package:hello_flutter_pizza_app/routes.dart';
@@ -25,11 +26,19 @@ class MyAppView extends StatelessWidget {
       routes: routes,
       home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
         if (state.status == AuthStatus.authenticated) {
+          var userRepository = context.read<AuthBloc>().userRepository;
+          return MultiBlocProvider(providers: [
+            BlocProvider(create: (context) => AuthBloc(userRepository)),
+            BlocProvider(create: (context) => SignInBloc(userRepository)),
+          ], child: HomePage());
+
+          // single bloc provider
           // return BlocProvider(
           //     create: (context) => AuthBloc(
           //         userRepository: context.read<AuthBloc>().userRepository),
           //     child: HomePage());
-          return HomePage();
+
+          // return HomePage();
         } else {
           return const AuthPage();
         }

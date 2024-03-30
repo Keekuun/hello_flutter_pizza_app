@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_flutter_pizza_app/pages/auth/blocs/auth_bloc/auth_bloc.dart';
 
 import '../../components/home_drawer.dart';
+import '../auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class HomePage extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -196,6 +199,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           drawer: const HomeDrawer(),
+          // drawer: BlocProvider<SignInBloc>(
+          //   create: (context) =>
+          //       SignInBloc(context.read<AuthBloc>().userRepository),
+          //   child: const HomeDrawer(),
+          // ),
         ));
   }
 }

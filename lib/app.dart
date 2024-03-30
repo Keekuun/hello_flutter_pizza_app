@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // return MyAppView;
     return RepositoryProvider<AuthBloc>(
-      create: (context) => AuthBloc(userRepository: firebaseUserRepository),
+      create: (context) => AuthBloc(firebaseUserRepository),
       child: const MyAppView(),
     );
   }

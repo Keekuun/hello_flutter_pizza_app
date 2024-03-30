@@ -132,7 +132,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           ],
         ),
       )),
-      drawer: const HomeDrawer(),
+      drawer: const HomeDrawer(logoutVisible: false,),
     );
   }
 }

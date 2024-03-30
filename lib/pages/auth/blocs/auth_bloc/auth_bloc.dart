@@ -12,7 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserRepository userRepository;
   late final StreamSubscription<MyUser?> _userSubscription;
 
-  AuthBloc({required this.userRepository}) : super(const AuthState.unknown()) {
+  AuthBloc(this.userRepository) : super(const AuthState.unknown()) {
     _userSubscription = userRepository.user.listen((user) {
       add(AuthUserChanged(user));
     });

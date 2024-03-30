@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../pages/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  final bool logoutVisible;
+
+  const HomeDrawer({super.key, this.logoutVisible = true});
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +78,18 @@ class HomeDrawer extends StatelessWidget {
                         SizedBox(width: 10),
                         Text('个人中心', style: TextStyle(color: Colors.black87)),
                       ])),
-                  ListTile(
-                      onTap: () {},
+                  logoutVisible ? ListTile(
+                      onTap: () {
+                        context
+                            .read<SignInBloc>()
+                            .add(SignOutRequired());
+                      },
                       title: const Row(children: [
                         Icon(Icons.exit_to_app_rounded, color: Colors.red),
                         SizedBox(width: 10),
                         Text('退出登录', style: TextStyle(color: Colors.red)),
-                      ]))
+                      ]),
+                  ) : const SizedBox()
                 ]),
                 const Spacer(),
                 const Text('做披萨我们是认真的！',
