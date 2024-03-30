@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/auth_bloc/auth_bloc.dart';
+import 'blocs/auth_bloc/auth_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'app_view.dart';

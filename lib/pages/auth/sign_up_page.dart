@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_flutter_pizza_app/components/my_text_field.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 
+import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
+import '../../components/my_text_field.dart';
 import 'form_valid.dart';
 
 class SignUpPage extends StatefulWidget {

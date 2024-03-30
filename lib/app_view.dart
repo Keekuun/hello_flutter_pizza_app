@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/auth_bloc/auth_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/views/auth_page.dart';
-import 'package:hello_flutter_pizza_app/pages/home/home_page.dart';
-import 'package:hello_flutter_pizza_app/routes.dart';
+
+import 'blocs/auth_bloc/auth_bloc.dart';
+import 'blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'pages/auth/auth_page.dart';
+import 'pages/home/home_page.dart';
+import 'routes.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});

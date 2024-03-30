@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
-import '../../../components/my_text_field.dart';
+import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../../components/my_text_field.dart';
 import 'form_valid.dart';
 
 class SignInPage extends StatefulWidget {

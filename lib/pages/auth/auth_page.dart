@@ -2,13 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_flutter_pizza_app/components/home_drawer.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/blocs/sign_up_bloc/sign_up_bloc.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/views/sign_in_page.dart';
-import 'package:hello_flutter_pizza_app/pages/auth/views/sign_up_page.dart';
-
-import '../blocs/auth_bloc/auth_bloc.dart';
-import '../blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../../blocs/auth_bloc/auth_bloc.dart';
+import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
+import '../../components/home_drawer.dart';
+import 'sign_in_page.dart';
+import 'sign_up_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -132,7 +131,9 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           ],
         ),
       )),
-      drawer: const HomeDrawer(logoutVisible: false,),
+      drawer: const HomeDrawer(
+        logoutVisible: false,
+      ),
     );
   }
 }
