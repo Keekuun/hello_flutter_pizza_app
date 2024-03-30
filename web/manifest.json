@@ -1,7 +1,7 @@
 {
-    "name": "hello_flutter_pizza_app",
-    "short_name": "hello_flutter_pizza_app",
-    "start_url": ".",
+    "name": "披萨",
+    "short_name": "披萨",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
