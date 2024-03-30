@@ -5,7 +5,7 @@ class PizzaEntity {
   String pizzaId;
   String picture;
   bool isVeg;
-  double spicy;
+  int spicy;
   String name;
   String description;
   double price;

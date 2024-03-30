@@ -5,7 +5,7 @@ import 'entities/entities.dart';
 import 'models/models.dart';
 import 'pizza_repository_abstract.dart';
 
-class FirebasePizzaRepo implements PizzaRepository {
+class FirebasePizzaRepository implements PizzaRepository {
   final pizzaCollection = FirebaseFirestore.instance.collection('pizzas');
 
   @override

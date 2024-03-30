@@ -7,5 +7,5 @@ import 'pages/home/home_page.dart';
 final Map<String, WidgetBuilder> routes = {
   '/auth': (context) => const AuthPage(),
   '/home': (context) => HomePage(),
-  '/homeDetail': (context) => const HomeDetailPage(),
+  '/detail': (context) => const HomeDetailPage(),
 };

@@ -6,8 +6,8 @@ class Pizza {
   String picture;
   // 是否是素食
   bool isVeg;
-  // 辣度：1-不辣 2-微辣 3-中辣 4-重辣
-  double spicy;
+  // 辣度：0-不辣 1-微辣 2-中辣 3-重辣
+  int spicy;
   String name;
   String description;
   double price;
