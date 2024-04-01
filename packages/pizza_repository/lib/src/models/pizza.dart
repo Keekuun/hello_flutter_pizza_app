@@ -4,14 +4,17 @@ import 'models.dart';
 class Pizza {
   String pizzaId;
   String picture;
+
   // 是否是素食
   bool isVeg;
+
   // 辣度：0-不辣 1-微辣 2-中辣 3-重辣
   int spicy;
   String name;
   String description;
   double price;
   double discount;
+
   // 能量
   Macros macros;
 
@@ -52,6 +55,20 @@ class Pizza {
       price: entity.price,
       discount: entity.discount,
       macros: entity.macros,
+    );
+  }
+
+  static Pizza empty() {
+    return Pizza(
+      pizzaId: '',
+      picture: '',
+      isVeg: false,
+      spicy: 0,
+      name: '',
+      description: '',
+      price: 0,
+      discount: 0,
+      macros: Macros.empty(),
     );
   }
 }

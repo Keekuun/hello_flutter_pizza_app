@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pizza_repository/pizza_repository.dart';
 
 import '../../components/macro.dart';
 
@@ -9,9 +12,17 @@ class HomeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late Pizza pizza;
+    try {
+      pizza = ModalRoute.of(context)?.settings.arguments as Pizza;
+    } catch (e) {
+      pizza = Pizza.empty();
+      log('pizza error: $e');
+    }
+
     return Title(
         color: Colors.white,
-        title: '披萨详情',
+        title: pizza.name == '' ? pizza.name : '披萨详情',
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
             appBar: AppBar(
@@ -72,7 +83,7 @@ class HomeDetailPage extends StatelessWidget {
                                 blurRadius: 5)
                           ],
                           image: DecorationImage(
-                              image: AssetImage('assets/1.png'))),
+                              image: NetworkImage(pizza.picture))),
                     ),
                     const SizedBox(
                       height: 30,
@@ -95,11 +106,11 @@ class HomeDetailPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Expanded(
+                                Expanded(
                                   flex: 2,
                                   child: Text(
-                                    'pizza.name',
-                                    style: TextStyle(
+                                    pizza.name,
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -113,7 +124,7 @@ class HomeDetailPage extends StatelessWidget {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "\$${10 - (10 * (0.2) / 100)}",
+                                          "\$${pizza.price - (pizza.price * (pizza.discount) / 100)}",
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
@@ -121,9 +132,9 @@ class HomeDetailPage extends StatelessWidget {
                                                   .colorScheme
                                                   .primary),
                                         ),
-                                        const Text(
-                                          "\$${10}.00",
-                                          style: TextStyle(
+                                        Text(
+                                          "\$${pizza.price}",
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.grey,
@@ -139,35 +150,35 @@ class HomeDetailPage extends StatelessWidget {
                             const SizedBox(
                               height: 12,
                             ),
-                            const Row(
+                            Row(
                               children: [
                                 MyMacroWidget(
-                                  title: "Calories",
-                                  value: 10,
+                                  title: "卡路里",
+                                  value: pizza.macros.calories,
                                   icon: FontAwesomeIcons.fire,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 MyMacroWidget(
-                                  title: "Protein",
-                                  value: 12,
+                                  title: "蛋白质",
+                                  value: pizza.macros.proteins,
                                   icon: FontAwesomeIcons.dumbbell,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 MyMacroWidget(
-                                  title: "Fat",
-                                  value: 12,
+                                  title: "脂肪",
+                                  value: pizza.macros.fat,
                                   icon: FontAwesomeIcons.oilWell,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 MyMacroWidget(
-                                  title: "Carbs",
-                                  value: 12,
+                                  title: "碳水",
+                                  value: pizza.macros.carbs,
                                   icon: FontAwesomeIcons.breadSlice,
                                 ),
                               ],
