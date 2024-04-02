@@ -124,7 +124,7 @@ class HomeDetailPage extends StatelessWidget {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "\$${pizza.price - (pizza.price * (pizza.discount) / 100)}",
+                                          "\$${(pizza.price - (pizza.price * (pizza.discount) / 100)).toStringAsFixed(2)}",
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class HomeDetailPage extends StatelessWidget {
                                                   .primary),
                                         ),
                                         Text(
-                                          "\$${pizza.price}",
+                                          "\$${pizza.price.toStringAsFixed(2)}",
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,

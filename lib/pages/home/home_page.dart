@@ -236,7 +236,7 @@ class PizzaCard extends StatelessWidget {
                         ),
                         Text(
                           // "\$${10}.00",
-                          "\$${pizza.price}",
+                          "\$${pizza.price.toStringAsFixed(2)}",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey.shade500,
