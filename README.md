@@ -9,13 +9,6 @@ flutter create --template=package pizza_repository
 ```
 
 # use firebase
->[将 Firebase 添加到您的 Flutter 应用](https://firebase.google.com/docs/flutter/setup?hl=zh-cn&platform=ios)
->
-> [Setting up Firebase for Flutter (Connecting Android, iOS, and Web) Flutter Firebase 2023](https://www.youtube.com/watch?v=YVB94s21jD8)
->
-> [firestore](https://console.firebase.google.com/project/pizza-app-91583/firestore)
->
-
 + 1. set Authentication: 选择email/password
 + 2.add Firestore Database: 选择test mode 测试用
 
@@ -56,3 +49,17 @@ keytool -v -list -keystore keystore
 ```
 
 > 当然上述 package name 都是可以修改的，只供调试使用。
+
+
+> 参考资料
+> 
+> 1.[将 Firebase 添加到您的 Flutter 应用](https://firebase.google.com/docs/flutter/setup?hl=zh-cn&platform=ios)
+>
+> 2.[Setting up Firebase for Flutter (Connecting Android, iOS, and Web) Flutter Firebase 2023](https://www.youtube.com/watch?v=YVB94s21jD8)
+>
+> 3.[firestore](https://console.firebase.google.com/project/pizza-app-91583/firestore)
+>
+
+# app 应用名和图标设置
+
+> [Flutter修改应用名称及应用图标](https://juejin.cn/post/7220688635142455356)
